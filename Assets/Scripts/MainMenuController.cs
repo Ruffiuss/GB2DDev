@@ -57,7 +57,7 @@ public class MainMenuController : BaseController
                         AddTouchTrail(touch);
                         break;
                     case TouchPhase.Ended:
-                        DeleteTouchTrail(touch);
+                        CleanTouchTrail(touch);
                         break;
                 }
             }
@@ -76,7 +76,7 @@ public class MainMenuController : BaseController
         _touchTrails[touch.fingerId].SetActive(true);
     }
 
-    private void DeleteTouchTrail(Touch touch)
+    private void CleanTouchTrail(Touch touch)
     {
         if (!_touchTrails.ContainsKey(touch.fingerId))
             return;
