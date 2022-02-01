@@ -15,6 +15,8 @@ public class BaseController : IDisposable
             return;
         
         _isDisposed = true;
+
+        OnDispose();
             
         foreach (var baseController in _baseControllers)
             baseController?.Dispose();
@@ -25,8 +27,6 @@ public class BaseController : IDisposable
             Object.Destroy(cachedGameObject);
                 
         _gameObjects.Clear();
-
-        OnDispose();
     }
 
     protected void AddController(BaseController baseController)
