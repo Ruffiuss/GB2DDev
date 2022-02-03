@@ -10,8 +10,11 @@ public class FloatInputJoystick : BaseInputView, IPointerDownHandler, IPointerUp
     #region Fields
 
     [SerializeField] private Joystick _joystick;
+    [SerializeField] private GameObject _joystickView;
     private CanvasGroup _container;
     private Transform _placeForUI;
+
+    private Vector3 _defaultPosition;
 
     private bool _usedJoystick;
 
@@ -25,6 +28,9 @@ public class FloatInputJoystick : BaseInputView, IPointerDownHandler, IPointerUp
         _placeForUI = placeForUI;
         gameObject.transform.SetParent(_placeForUI);
         _container = gameObject.GetComponentInParent<CanvasGroup>();
+        _defaultPosition = transform.position;
+        _joystickView.SetActive(false);
+        Debug.Log($"On Init:{_joystickView.activeSelf}");
         UpdateManager.SubscribeToUpdate(Move);
     }
 
@@ -39,12 +45,17 @@ public class FloatInputJoystick : BaseInputView, IPointerDownHandler, IPointerUp
         _joystick.SetStartPosition(eventData.position);
         _joystick.OnPointerDown(eventData);
         _usedJoystick = true;
+        _joystickView.transform.position = eventData.position;
+        Debug.Log($"BeforeSetActive:{_joystickView.activeSelf}");
+        _joystickView.SetActive(true);
+        Debug.Log($"AfterSetActive:{_joystickView.activeSelf}");
         _container.alpha = 1;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         _usedJoystick = false;
+        transform.position = _defaultPosition;
         _container.alpha = 0;
     }
 
@@ -55,6 +66,7 @@ public class FloatInputJoystick : BaseInputView, IPointerDownHandler, IPointerUp
 
     private void Move()
     {
+        Debug.Log($"OnMove:{_joystickView.activeSelf}");
         if (_usedJoystick)
         {
             float moveStep = 10 * Time.deltaTime * CrossPlatformInputManager.GetAxis("Horizontal");
