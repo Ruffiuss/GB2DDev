@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityStandardAssets.CrossPlatformInput;
 
 
-public class FloatInputJoystick : BaseInputView
+public class FloatInputJoystick : BaseInputView, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     #region Fields
 
@@ -26,61 +26,31 @@ public class FloatInputJoystick : BaseInputView
         gameObject.transform.SetParent(_placeForUI);
         _container = gameObject.GetComponentInParent<CanvasGroup>();
         UpdateManager.SubscribeToUpdate(Move);
-        UpdateManager.SubscribeToUpdate(TouchHandler);
     }
 
     private void OnDestroy()
     {
         UpdateManager.UnsubscribeFromUpdate(Move);
-        UpdateManager.UnsubscribeFromUpdate(TouchHandler);
     }
 
-    private void TouchHandler()
+    public void OnPointerDown(PointerEventData eventData)
     {
-        if (Input.touchCount > 0 )
-        {
-            var lastTouch = Input.GetTouch(0);
-            switch (lastTouch.phase)
-            {
-                case TouchPhase.Began:
-                    if (!_usedJoystick)
-                        OnPointerDown(lastTouch.position);
-                    break;
-                case TouchPhase.Moved:
-                    OnDrag(lastTouch.position);
-                    break;
-                case TouchPhase.Stationary:
-                    break;
-                case TouchPhase.Ended:
-                    OnPointerUp();
-                    break;
-                case TouchPhase.Canceled:
-                    OnPointerUp();
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
-    public void OnPointerDown(Vector3 position)
-    {
-        _joystick.transform.position = position;
-        _joystick.SetStartPosition(position);
-        _joystick.OnPointerDown();
+        _joystick.transform.position = eventData.position;
+        _joystick.SetStartPosition(eventData.position);
+        _joystick.OnPointerDown(eventData);
         _usedJoystick = true;
         _container.alpha = 1;
     }
 
-    public void OnPointerUp()
+    public void OnPointerUp(PointerEventData eventData)
     {
         _usedJoystick = false;
         _container.alpha = 0;
     }
 
-    public void OnDrag(Vector3 position)
+    public void OnDrag(PointerEventData eventData)
     {
-        _joystick.OnDrag(position);
+        _joystick.OnDrag(eventData);
     }
 
     private void Move()
