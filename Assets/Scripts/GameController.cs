@@ -2,7 +2,7 @@
 
 public class GameController : BaseController
 {
-    public GameController(ProfilePlayer profilePlayer)
+    public GameController(ProfilePlayer profilePlayer, UnityEngine.Transform placeForUI)
     {
         var leftMoveDiff = new SubscriptionProperty<float>();
         var rightMoveDiff = new SubscriptionProperty<float>();
@@ -10,7 +10,7 @@ public class GameController : BaseController
         var tapeBackgroundController = new TapeBackgroundController(leftMoveDiff, rightMoveDiff);
         AddController(tapeBackgroundController);
         
-        var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar);
+        var inputGameController = new InputGameController(leftMoveDiff, rightMoveDiff, profilePlayer.CurrentCar, placeForUI);
         AddController(inputGameController);
             
         var carController = new CarController();

@@ -33,7 +33,7 @@ public class MainController : BaseController
                 _gameController?.Dispose();
                 break;
             case GameState.Game:
-                _gameController = new GameController(_profilePlayer);
+                _gameController = new GameController(_profilePlayer, _placeForUi);
                 _mainMenuController?.Dispose();
                 break;
             default:

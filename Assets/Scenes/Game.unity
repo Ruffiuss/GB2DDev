@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 693758136}
   - component: {fileID: 693758135}
   - component: {fileID: 693758134}
+  - component: {fileID: 693758137}
   m_Layer: 0
   m_Name: UiContainer
   m_TagString: Untagged
@@ -302,6 +303,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &693758137
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693758132}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1002511159
 GameObject:
   m_ObjectHideFlags: 0

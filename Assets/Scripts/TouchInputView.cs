@@ -10,7 +10,7 @@ public class TouchInputView : BaseInputView
     private float _tapAcceleration = 0.1f;
     private float _slowUpPerSecond = 0.5f;
 
-    public override void Init(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, float speed)
+    public override void Init(SubscriptionProperty<float> leftMove, SubscriptionProperty<float> rightMove, float speed, Transform placeForUI)
     {
         base.Init(leftMove, rightMove, speed);
         UpdateManager.SubscribeToUpdate(OnUpdate);

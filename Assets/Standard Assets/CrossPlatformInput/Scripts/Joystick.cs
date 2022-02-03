@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace UnityStandardAssets.CrossPlatformInput
 {
-	public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+	public class Joystick : MonoBehaviour
 	{
 		public enum AxisOption
 		{
@@ -76,20 +76,20 @@ namespace UnityStandardAssets.CrossPlatformInput
 		}
 
 
-		public void OnDrag(PointerEventData data)
+		public void OnDrag(Vector3 position)
 		{
 			Vector3 newPos = Vector3.zero;
 
 			if (m_UseX)
 			{
-				int delta = (int)(data.position.x - m_StartPos.x);
+				int delta = (int)(position.x - m_StartPos.x);
 				delta = Mathf.Clamp(delta, - MovementRange, MovementRange);
 				newPos.x = delta;
 			}
 
 			if (m_UseY)
 			{
-				int delta = (int)(data.position.y - m_StartPos.y);
+				int delta = (int)(position.y - m_StartPos.y);
 				delta = Mathf.Clamp(delta, -MovementRange, MovementRange);
 				newPos.y = delta;
 			}
@@ -98,14 +98,14 @@ namespace UnityStandardAssets.CrossPlatformInput
 		}
 
 
-		public void OnPointerUp(PointerEventData data)
+		public void OnPointerUp(Vector3 position)
 		{
 			transform.position = m_StartPos;
 			UpdateVirtualAxes(m_StartPos);
 		}
 
 
-		public void OnPointerDown(PointerEventData data) { }
+		public void OnPointerDown() { }
 
 		void OnDisable()
 		{
