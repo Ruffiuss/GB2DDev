@@ -1,11 +1,13 @@
 ﻿using Model.Analytic;
 using Profile;
 using System.Collections.Generic;
+using Tools.Ads;
 using UnityEngine;
 
 public class Root : MonoBehaviour, IAnalyticTools
 {
     [SerializeField] private Transform _placeForUi;
+    [SerializeField] private UnityAdsTools _unityAdsTools;
 
     private MainController _mainController;
 
@@ -13,7 +15,7 @@ public class Root : MonoBehaviour, IAnalyticTools
     {
         var profilePlayer = new ProfilePlayer(15f);
         profilePlayer.CurrentState.Value = GameState.Start;
-        _mainController = new MainController(_placeForUi, profilePlayer, (IAnalyticTools)this);
+        _mainController = new MainController(_placeForUi, profilePlayer, this, _unityAdsTools);
     }
 
     protected void OnDestroy()

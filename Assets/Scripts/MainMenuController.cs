@@ -1,6 +1,7 @@
 ﻿using Model.Analytic;
 using Profile;
 using System.Collections.Generic;
+using Tools.Ads;
 using UnityEngine;
 
 public class MainMenuController : BaseController
@@ -9,11 +10,13 @@ public class MainMenuController : BaseController
     private readonly ProfilePlayer _profilePlayer;
     private readonly MainMenuView _view;
     private readonly IAnalyticTools _analytics;
+    private readonly IAdsShower _ads;
 
-    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAnalyticTools analytics)
+    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAnalyticTools analytics, IAdsShower ads)
     {
         _profilePlayer = profilePlayer;
         _analytics = analytics;
+        _ads = ads;
         _view = LoadView(placeForUi);
         _view.Init(StartGame);
     }
@@ -40,7 +43,8 @@ public class MainMenuController : BaseController
         {
             _analytics.SendMessage("Start with exception");
         }
-        
+
+        _ads.ShowInterstitial();
         _profilePlayer.CurrentState.Value = GameState.Game;
     }
 }
