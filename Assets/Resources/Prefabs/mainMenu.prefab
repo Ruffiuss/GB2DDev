@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonStart: {fileID: 315532611085353152}
+  _buttonAdsReward: {fileID: 4245315003511075797}
 --- !u!1 &6888920513732523659
 GameObject:
   m_ObjectHideFlags: 0
