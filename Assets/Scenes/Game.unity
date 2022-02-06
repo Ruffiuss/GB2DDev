@@ -376,6 +376,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _placeForUi: {fileID: 693758133}
   _unityAdsTools: {fileID: 297131766}
+  _products:
+  - Id: com.c1.racing.goldPack
+    CurrentProductType: 0
 --- !u!4 &1002511161
 Transform:
   m_ObjectHideFlags: 0

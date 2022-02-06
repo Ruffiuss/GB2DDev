@@ -1,8 +1,11 @@
 ﻿using Model.Analytic;
+using Model.Shop;
 using Profile;
+using Shop;
 using System.Collections.Generic;
 using Tools.Ads;
 using UnityEngine;
+using UnityEngine.Purchasing;
 
 public class MainMenuController : BaseController
 {
@@ -14,12 +17,14 @@ public class MainMenuController : BaseController
 
     private System.Action _succsessAdsShow;
 
-    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAnalyticTools analytics, IAdsShower ads)
+    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAnalyticTools analytics, IAdsShower ads, System.Action<GoldBalanceView> goldBalanceView, System.Action<IAPButton> iapView)
     {
         _profilePlayer = profilePlayer;
         _analytics = analytics;
         _ads = ads;
         _view = LoadView(placeForUi);
+        goldBalanceView.Invoke(_view.GetComponentInChildren<GoldBalanceView>());
+        iapView.Invoke(_view.GetComponentInChildren<IAPButton>());
         _view.Init(StartGame, AdsReward);
     }
 

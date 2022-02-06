@@ -2,7 +2,8 @@
 
 namespace Model.Shop
 {
-    internal class ShopProduct
+    [System.Serializable]
+    public class ShopProduct
     {
         public string Id;
         public ProductType CurrentProductType;
