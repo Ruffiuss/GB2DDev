@@ -12,13 +12,15 @@ public class MainMenuController : BaseController
     private readonly IAnalyticTools _analytics;
     private readonly IAdsShower _ads;
 
+    private System.Action _succsessAdsShow;
+
     public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAnalyticTools analytics, IAdsShower ads)
     {
         _profilePlayer = profilePlayer;
         _analytics = analytics;
         _ads = ads;
         _view = LoadView(placeForUi);
-        _view.Init(StartGame);
+        _view.Init(StartGame, AdsReward);
     }
 
     private MainMenuView LoadView(Transform placeForUi)
@@ -46,6 +48,12 @@ public class MainMenuController : BaseController
 
         _ads.ShowInterstitial();
         _profilePlayer.CurrentState.Value = GameState.Game;
+    }
+
+    private void AdsReward()
+    {
+        _view.DisableAdsRewardButton();
+        _ads.ShowReward(_succsessAdsShow);
     }
 }
 
