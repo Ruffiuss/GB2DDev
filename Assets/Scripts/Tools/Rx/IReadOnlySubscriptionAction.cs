@@ -2,7 +2,7 @@
 
 namespace Tools
 {
-    public interface IReadOnlySubscriptionAction
+    internal interface IReadOnlySubscriptionAction
     {
         void SubscribeOnChange(Action subscriptionAction);
         void UnSubscriptionOnChange(Action unsubscriptionAction);

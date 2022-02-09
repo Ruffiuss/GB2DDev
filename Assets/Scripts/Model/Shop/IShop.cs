@@ -1,17 +1,12 @@
-﻿using System;
-using Tools;
-using UnityEngine.Purchasing;
-
+﻿using Tools;
 namespace Model.Shop
 {
-    public interface IShop
+    internal interface IShop
     {
-        IReadOnlySubscriptionAction OnSuccessPurchase { get; }
-        IReadOnlySubscriptionAction OnFailedPurchase { get; }
-
         void Buy(string id);
         string GetCost(string productID);
         void RestorePurchase();
-        void RegisterShopButton(IAPButton button);
+        IReadOnlySubscriptionAction OnSuccessPurchase { get; }
+        IReadOnlySubscriptionAction OnFailedPurchase { get; }
     }
 }

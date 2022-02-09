@@ -16,7 +16,7 @@ namespace Tools.Ads
 
         private void Start()
         {
-            Advertisement.Initialize(_gameId);
+            Advertisement.Initialize(_gameId, true);
         }
 
         public void ShowInterstitial()
