@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e3240f3e02b9846a3534e986860192, type: 3}
   m_Name: Transimision
   m_EditorClassIdentifier: 
-  _id: 0
-  _title: 
+  _id: 2
+  _title: Transmision

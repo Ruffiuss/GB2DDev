@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3885464851c97db408f275d635ae1eca, type: 3}
   m_Name: MountainTransimision
   m_EditorClassIdentifier: 
-  _itemConfig: {fileID: 0}
-  _upgradeType: 0
-  _valueUpgrade: 0
+  _itemConfig: {fileID: 11400000, guid: 14a3c984e69e6504f801302ed22526ac, type: 2}
+  _upgradeType: 2
+  _valueUpgrade: 1
