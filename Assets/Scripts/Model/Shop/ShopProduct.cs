@@ -1,10 +1,13 @@
-﻿using UnityEngine.Purchasing;
+﻿using System;
+using UnityEngine.Purchasing;
 
-namespace Model.Shop
+namespace Shop
 {
-    internal class ShopProduct
+    [Serializable]
+    public class ShopProduct
     {
         public string Id;
         public ProductType CurrentProductType;
+        public ProductModification ProductModification;
     }
 }

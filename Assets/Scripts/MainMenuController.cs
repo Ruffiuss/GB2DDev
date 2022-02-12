@@ -1,5 +1,6 @@
 ﻿using Model.Analytic;
 using Profile;
+using Shop;
 using System.Collections.Generic;
 using Tools.Ads;
 using UnityEngine;
@@ -11,16 +12,24 @@ public class MainMenuController : BaseController
     private readonly MainMenuView _view;
     private readonly IAnalyticTools _analytics;
     private readonly IAdsShower _ads;
+    private readonly IShop _shop;
 
     private System.Action _succsessAdsShow;
 
-    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAnalyticTools analytics, IAdsShower ads)
+    public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, IAnalyticTools analytics, IAdsShower ads, IShop shop)
     {
         _profilePlayer = profilePlayer;
         _analytics = analytics;
         _ads = ads;
         _view = LoadView(placeForUi);
-        _view.Init(StartGame, AdsReward);
+        _shop = shop;
+
+        _view.Init(StartGame, AdsReward, Buy, _profilePlayer.Gold);
+    }
+
+    private void Buy()
+    {
+        _shop.Buy("com.racingGame.gold100");
     }
 
     private MainMenuView LoadView(Transform placeForUi)

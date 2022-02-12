@@ -376,6 +376,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _placeForUi: {fileID: 693758133}
   _unityAdsTools: {fileID: 297131766}
+  _shopProducts:
+  - Id: com.racingGame.gold100
+    CurrentProductType: 0
+    ProductModification:
+      ResourceType: 1
+      Count: 100
 --- !u!4 &1002511161
 Transform:
   m_ObjectHideFlags: 0

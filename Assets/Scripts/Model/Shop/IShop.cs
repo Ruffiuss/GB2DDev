@@ -1,12 +1,12 @@
 ﻿using Tools;
-namespace Model.Shop
+namespace Shop
 {
-    internal interface IShop
+    public interface IShop
     {
         void Buy(string id);
         string GetCost(string productID);
         void RestorePurchase();
-        IReadOnlySubscriptionAction OnSuccessPurchase { get; }
+        IReadOnlySubscriptionActionT<string> OnSuccessPurchase { get; }
         IReadOnlySubscriptionAction OnFailedPurchase { get; }
     }
 }
