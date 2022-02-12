@@ -2,4 +2,5 @@
 {
     int Id { get; set; }
     ItemInfo Info { get; set; }
+    UnityEngine.Sprite Sprite {get;}
 }

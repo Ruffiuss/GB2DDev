@@ -22,9 +22,15 @@ namespace Assets.Scripts.Data
 
         #endregion
 
-        #region UnityMethods
-
-
+        #region ClassLifeCycles
+        ~AbilitiesGroupView()
+        {
+            foreach (var view in _currentViews)
+            {
+                view.OnClick -= AbilityHandler;
+            }
+            _currentViews.Clear();
+        }
 
         #endregion
 

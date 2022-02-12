@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1546325578058878471}
   - component: {fileID: 7263516145354078555}
+  - component: {fileID: 7061198131290015374}
   m_Layer: 5
   m_Name: Ability
   m_TagString: Untagged
@@ -50,6 +51,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 8132882187317302313}
+--- !u!222 &7061198131290015374
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2173881482128415144}
+  m_CullTransparentMesh: 0
 --- !u!1 &7556564404778014880
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +174,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2234076068057432800}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []

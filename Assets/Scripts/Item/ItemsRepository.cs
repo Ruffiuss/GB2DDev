@@ -29,10 +29,11 @@ public class ItemsRepository : BaseController, IItemsRepository
 
     private IItem CreateItem(ItemConfig itemConfig)
     {
-        return new Item 
-        { 
-            Id = itemConfig.Id, 
-            Info = new ItemInfo { Title = itemConfig.Title } 
+        return new Item
+        {
+            Id = itemConfig.Id,
+            Info = new ItemInfo { Title = itemConfig.Title },
+            Sprite = itemConfig.Sprite
         };
     }
 }

@@ -10,6 +10,8 @@ namespace Assets.Scripts.Data
         #region Fields
 
         [SerializeField] private Button _button;
+        private Image _imageComponent;
+        private Sprite _abilitySprite;
         private IItem _item;
 
         #endregion
@@ -25,6 +27,7 @@ namespace Assets.Scripts.Data
         private void Awake()
         {
             _button.onClick.AddListener(Click);
+            _imageComponent = _button.GetComponent<Image>();
         }
 
         private void OnDestroy()
@@ -40,6 +43,8 @@ namespace Assets.Scripts.Data
         public void Init(IItem item)
         {
             _item = item;
+            _abilitySprite = item.Sprite;
+            _imageComponent.sprite = _abilitySprite;
         }
 
         private void Click()
