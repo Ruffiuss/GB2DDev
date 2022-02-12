@@ -52,7 +52,7 @@ public class MainController : BaseController
                 var inventoryModel = new InventoryModel();
                 _inventoryController = new InventoryController(_itemsConfig, inventoryModel);
                 _inventoryController.ShowInventory();
-                _gameController = new GameController(_profilePlayer, _abilityItems, inventoryModel);
+                _gameController = new GameController(_profilePlayer, _abilityItems, inventoryModel, _placeForUi);
                 _mainMenuController?.Dispose();
                 break;
             default:

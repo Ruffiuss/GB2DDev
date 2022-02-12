@@ -13,6 +13,7 @@ public class MainMenuController : BaseController
     {
         _profilePlayer = profilePlayer;
         _view = LoadView(placeForUi);
+        AddGameObjects(_view.gameObject);
         _view.Init(StartGame);
     }
     
@@ -29,8 +30,7 @@ public class MainMenuController : BaseController
         _profilePlayer.CurrentState.Value = GameState.Game;
 
         _profilePlayer.AnalyticTools.SendMessage("start_game",
-            new Dictionary<string, object>() { {"time", Time.realtimeSinceStartup }
-    });
-}
+            new Dictionary<string, object>() { {"time", Time.realtimeSinceStartup }});
+    }
 }
 

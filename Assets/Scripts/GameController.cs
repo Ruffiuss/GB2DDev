@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Scripts.Data;
+using System.Collections.Generic;
 using Tools;
+using UnityEngine;
 
 public class GameController : BaseController
 {
-    public GameController(ProfilePlayer profilePlayer, IReadOnlyList<AbilityItemConfig> configs, InventoryModel inventoryModel)
+    public GameController(ProfilePlayer profilePlayer, IReadOnlyList<AbilityItemConfig> configs, InventoryModel inventoryModel, Transform placeForUI)
     {
         var leftMoveDiff = new SubscriptionProperty<float>();
         var rightMoveDiff = new SubscriptionProperty<float>();
@@ -18,8 +20,10 @@ public class GameController : BaseController
         AddController(carController);
 
         var abilityRepository = new AbilityRepository(configs);
+        var abilityViewPrefab = ResourceLoader.LoadPrefab(new ResourcePath() { PathResource = "Prefabs/AbilitiesGroupView" });
+        var abilityGroupView = GameObject.Instantiate(abilityViewPrefab, placeForUI).GetComponent<AbilitiesGroupView>();
         var abilitiesController = new AbilitiesController(carController, inventoryModel, abilityRepository,
-            new AbilitiesCollectionViewStub());
+            abilityGroupView);
         AddController(abilitiesController);
 
     }
