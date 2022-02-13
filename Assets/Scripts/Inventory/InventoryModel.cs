@@ -1,24 +1,52 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class InventoryModel : IInventoryModel
 {
-    private readonly List<IItem> _items = new List<IItem>();
+    private readonly Dictionary<IItem, bool> _items = new Dictionary<IItem, bool>();
+    private bool _isInShed = false;
+
+    public bool IsInShed => _isInShed;
+
+    public InventoryModel(bool isInShed = false)
+    {
+        _isInShed = isInShed;
+    }
 
     public IReadOnlyList<IItem> GetEquippedItems()
+    {
+        List<IItem> items = new List<IItem>();
+        foreach (var item in _items)
+        {
+            if (item.Value)
+                items.Add(item.Key);
+        }
+        return items;
+    }
+
+    public IReadOnlyDictionary<IItem, bool> GetAllItems()
     {
         return _items;
     }
 
     public void EquipItem(IItem item)
     {
-        if (_items.Contains(item))
-            return;
-
-        _items.Add(item);
+        if (_items.ContainsKey(item))
+        {
+            _items[item] = true;
+            Debug.Log($"{item.Info.Title} isEquiped {_items[item]}");
+        }
+        else
+            _items.Add(item, true);
     }
 
     public void UnEquipItem(IItem item)
     {
-        _items.Remove(item);
+        if (_items.ContainsKey(item))
+        {
+            _items[item] = false;
+            Debug.Log($"{item.Info.Title} isEquiped {_items[item]}");
+        }
     }
 }

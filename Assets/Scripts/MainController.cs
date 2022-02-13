@@ -42,14 +42,14 @@ public class MainController : BaseController
         {
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
-                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer.CurrentCar);
+                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer.CurrentCar, _placeForUi);
                 _shedController.Enter();
                 _shedController.Exit();
                 _gameController?.Dispose();
                 _inventoryController?.Dispose();
                 break;
             case GameState.Game:
-                var inventoryModel = new InventoryModel();
+                var inventoryModel = new InventoryModel(false);
                 _inventoryController = new InventoryController(_itemsConfig, inventoryModel);
                 _inventoryController.ShowInventory();
                 _gameController = new GameController(_profilePlayer, _abilityItems, inventoryModel, _placeForUi);

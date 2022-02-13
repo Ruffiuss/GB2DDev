@@ -4,20 +4,26 @@ using UnityEngine;
 public class ShedController : BaseController, IShedController
 {
     private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
-    private readonly Car _car;
     private readonly UpgradeHandlerRepository _upgradeRepository;
     private readonly InventoryController _inventoryController;
     private readonly InventoryModel _model;
+    private readonly Transform _placeForUI;
+    private readonly Car _car;
+    private readonly ResourcePath _shedUIPrefabPath = new ResourcePath() { PathResource = "Prefabs/Inventory"};
+    private readonly ResourcePath _shedItemPrefabPath = new ResourcePath() { PathResource = "Prefabs/InventoryItem"};
 
-    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car)
+    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car, Transform placeForUI)
     {
         _upgradeItems = upgradeItems;
         _car = car;
-        _upgradeRepository = new UpgradeHandlerRepository(upgradeItems);
+        _model = new InventoryModel(true);
+        _placeForUI = placeForUI;
 
-        _model = new InventoryModel();
+        _upgradeRepository = new UpgradeHandlerRepository(upgradeItems);
         AddController(_upgradeRepository);
+
         _inventoryController = new InventoryController(items, _model);
+        _inventoryController.InitShedUI(_placeForUI, _shedUIPrefabPath, _shedItemPrefabPath);
         AddController(_inventoryController);
     }
 
