@@ -1,5 +1,8 @@
-﻿public interface IUpgradeableCar
+﻿namespace Model
 {
-    float Speed { get; set; }
-    void Restore();
+    public interface IUpgradeableCar
+    {
+        float Speed { get; set; }
+        void Restore();
+    }
 }

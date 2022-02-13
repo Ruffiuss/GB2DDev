@@ -1,24 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using ItemFeature;
+using System.Collections.Generic;
 
-public class InventoryModel : IInventoryModel
+namespace Features.InventoryFeature
 {
-    private readonly List<IItem> _items = new List<IItem>();
-
-    public IReadOnlyList<IItem> GetEquippedItems()
+    public class InventoryModel : IInventoryModel
     {
-        return _items;
-    }
+        private readonly List<IItem> _items = new List<IItem>();
 
-    public void EquipItem(IItem item)
-    {
-        if (_items.Contains(item))
-            return;
+        public IReadOnlyList<IItem> GetEquippedItems()
+        {
+            return _items;
+        }
 
-        _items.Add(item);
-    }
+        public void EquipItem(IItem item)
+        {
+            if (_items.Contains(item))
+                return;
 
-    public void UnEquipItem(IItem item)
-    {
-        _items.Remove(item);
+            _items.Add(item);
+        }
+
+        public void UnEquipItem(IItem item)
+        {
+            _items.Remove(item);
+        }
     }
 }

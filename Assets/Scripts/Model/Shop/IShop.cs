@@ -1,4 +1,5 @@
-﻿using Tools;
+﻿using Tools.RX;
+
 namespace Model.Shop
 {
     internal interface IShop

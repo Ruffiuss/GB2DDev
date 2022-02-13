@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using ItemFeature;
+using System.Collections.Generic;
 using UI;
 
-public interface IInventoryView:IView
+namespace Features.InventoryFeature
 {
-    void Display(IReadOnlyList<IItem> items);
+    public interface IInventoryView : IView
+    {
+        void Display(IReadOnlyList<IItem> items);
+    }
 }

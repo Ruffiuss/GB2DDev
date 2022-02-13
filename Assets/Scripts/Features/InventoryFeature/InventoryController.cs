@@ -1,25 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using Core;
+using Data;
+using ItemFeature;
+using System.Collections.Generic;
 using Tools;
 
-public class InventoryController : BaseController, IInventoryController
+namespace Features.InventoryFeature
 {
-    private readonly IInventoryModel _inventoryModel;
-    private readonly IInventoryView _inventoryView;
-    private readonly IRepository<int, IItem> _itemsRepository;
-
-    public InventoryController(List<ItemConfig> itemConfigs, InventoryModel inventoryModel)
+    public class InventoryController : BaseController, IInventoryController
     {
-        _inventoryModel = inventoryModel;
-        _inventoryView = new InventoryView();
-        _itemsRepository = new ItemsRepository(itemConfigs);
-    }
+        private readonly IInventoryModel _inventoryModel;
+        private readonly IInventoryView _inventoryView;
+        private readonly IRepository<int, IItem> _itemsRepository;
 
-    public void ShowInventory()
-    {
-        foreach (var item in _itemsRepository.Content.Values)
-            _inventoryModel.EquipItem(item);
+        public InventoryController(List<ItemConfig> itemConfigs, InventoryModel inventoryModel)
+        {
+            _inventoryModel = inventoryModel;
+            _inventoryView = new InventoryView();
+            _itemsRepository = new ItemsRepository(itemConfigs);
+        }
 
-        var equippedItems = _inventoryModel.GetEquippedItems();
-        _inventoryView.Display(equippedItems);
+        public void ShowInventory()
+        {
+            foreach (var item in _itemsRepository.Content.Values)
+                _inventoryModel.EquipItem(item);
+
+            var equippedItems = _inventoryModel.GetEquippedItems();
+            _inventoryView.Display(equippedItems);
+        }
     }
 }

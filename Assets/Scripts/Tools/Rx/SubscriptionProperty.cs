@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Tools
+namespace Tools.RX
 {
     public class SubscriptionProperty<T> : IReadOnlySubscriptionProperty<T>
     {
         private T _value;
         private Action<T> _onChangeValue;
-        
+
         public T Value
         {
             get => _value;

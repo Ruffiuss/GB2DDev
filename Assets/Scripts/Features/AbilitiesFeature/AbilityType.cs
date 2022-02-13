@@ -1,5 +1,8 @@
-﻿public enum AbilityType
+﻿namespace Features.AbilitiesFeature
 {
-    None, 
-    Gun
+    public enum AbilityType
+    {
+        None,
+        Gun
+    }
 }

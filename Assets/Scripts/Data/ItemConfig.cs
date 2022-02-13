@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Item", menuName = "Item")]
-public class ItemConfig : ScriptableObject
+namespace Data
 {
-    [SerializeField]
-    private int _id;
+    [CreateAssetMenu(fileName = "Item", menuName = "Item")]
+    public class ItemConfig : ScriptableObject
+    {
+        [SerializeField]
+        private int _id;
 
-    [SerializeField]
-    private string _title;
+        [SerializeField]
+        private string _title;
 
-    public int Id => _id;
+        public int Id => _id;
 
-    public string Title => _title;
+        public string Title => _title;
+    }
 }

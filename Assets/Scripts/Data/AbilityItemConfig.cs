@@ -1,12 +1,16 @@
-﻿using System.Collections;
+﻿using Features.AbilitiesFeature;
+using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AbilityItem", menuName = "AbilityItem", order = 0)]
-public class AbilityItemConfig : ScriptableObject
+namespace Data
 {
-    public ItemConfig Item;
-    public GameObject View;
-    public AbilityType Type;
-    public float value;
-    public int Id => Item.Id;
+    [CreateAssetMenu(fileName = "AbilityItem", menuName = "AbilityItem", order = 0)]
+    public class AbilityItemConfig : ScriptableObject
+    {
+        public ItemConfig Item;
+        public GameObject View;
+        public AbilityType Type;
+        public float value;
+        public int Id => Item.Id;
+    }
 }

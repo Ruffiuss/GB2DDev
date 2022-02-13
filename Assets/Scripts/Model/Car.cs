@@ -1,18 +1,20 @@
-﻿public class Car: IUpgradeableCar
+﻿namespace Model
 {
-    public float Speed { get; set; }
-
-    private float _defaultSpeed;
-
-    public Car(float speed)
+    public class Car : IUpgradeableCar
     {
-        _defaultSpeed = speed;
-        Restore();
-    }
+        public float Speed { get; set; }
 
-    public void Restore()
-    {
-        Speed = _defaultSpeed;
-    }
+        private float _defaultSpeed;
 
+        public Car(float speed)
+        {
+            _defaultSpeed = speed;
+            Restore();
+        }
+
+        public void Restore()
+        {
+            Speed = _defaultSpeed;
+        }
+    }
 }

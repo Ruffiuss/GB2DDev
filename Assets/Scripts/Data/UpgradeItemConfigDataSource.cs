@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "UpgradeItemConfigDataSource", menuName = "UpgradeItemConfigDataSource")]
-public class UpgradeItemConfigDataSource : ScriptableObject
+namespace Data
 {
-    [SerializeField]
-    private UpgradeItemConfig[] _itemConfigs;
+    [CreateAssetMenu(fileName = "UpgradeItemConfigDataSource", menuName = "UpgradeItemConfigDataSource")]
+    public class UpgradeItemConfigDataSource : ScriptableObject
+    {
+        [SerializeField]
+        private UpgradeItemConfig[] _itemConfigs;
 
-    public UpgradeItemConfig[] ItemConfigs => _itemConfigs;
-}
+        public UpgradeItemConfig[] ItemConfigs => _itemConfigs;
+    }
 
-public class BaseDataSource<T> : ScriptableObject where T:ScriptableObject
-{
-    [SerializeField] private T[] _content;
+    public class BaseDataSource<T> : ScriptableObject where T : ScriptableObject
+    {
+        [SerializeField] private T[] _content;
 
-    public T[] Content => _content;
+        public T[] Content => _content;
 
+    }
 }

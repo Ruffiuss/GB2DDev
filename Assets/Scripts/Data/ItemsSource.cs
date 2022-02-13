@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = nameof(ItemsSource), menuName = "ItemsSource")]
-public class ItemsSource : BaseDataSource<ItemConfig>
+namespace Data
 {
+    [CreateAssetMenu(fileName = nameof(ItemsSource), menuName = "ItemsSource")]
+    public class ItemsSource : BaseDataSource<ItemConfig>
+    {
 
+    }
 }

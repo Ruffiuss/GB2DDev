@@ -1,6 +1,9 @@
-﻿public struct ItemInfo
+﻿namespace ItemFeature
 {
-    public string Title { get; set; }
+    public struct ItemInfo
+    {
+        public string Title { get; set; }
 
-    public string Description { get; set; }
+        public string Description { get; set; }
+    }
 }

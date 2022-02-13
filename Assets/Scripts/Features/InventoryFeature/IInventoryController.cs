@@ -1,4 +1,7 @@
-﻿public interface IInventoryController
+﻿namespace Features.InventoryFeature
 {
-    void ShowInventory();
+    public interface IInventoryController
+    {
+        void ShowInventory();
+    }
 }

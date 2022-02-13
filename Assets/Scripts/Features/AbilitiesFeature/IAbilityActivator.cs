@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public interface IAbilityActivator
+namespace Features.AbilitiesFeature
 {
-    GameObject GetViewObject();
+    public interface IAbilityActivator
+    {
+        GameObject GetViewObject();
+    }
 }

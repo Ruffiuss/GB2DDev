@@ -1,4 +1,4 @@
-﻿namespace Profile
+﻿namespace Model
 {
     public enum GameState
     {
@@ -7,5 +7,3 @@
         Game
     }
 }
-
-

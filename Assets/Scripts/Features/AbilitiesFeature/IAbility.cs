@@ -1,4 +1,7 @@
-﻿public interface IAbility
+﻿namespace Features.AbilitiesFeature
 {
-    void Apply(IAbilityActivator activator);
+    public interface IAbility
+    {
+        void Apply(IAbilityActivator activator);
+    }
 }

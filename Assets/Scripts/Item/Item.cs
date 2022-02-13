@@ -1,5 +1,8 @@
-﻿public class Item : IItem
+﻿namespace ItemFeature
 {
-    public int Id { get; set; }
-    public ItemInfo Info { get; set; }
+    public class Item : IItem
+    {
+        public int Id { get; set; }
+        public ItemInfo Info { get; set; }
+    }
 }

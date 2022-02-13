@@ -1,4 +1,7 @@
-﻿public interface IUpgradeCarHandler
+﻿namespace Model
 {
-    IUpgradeableCar Upgrade(IUpgradeableCar car);
+    public interface IUpgradeCarHandler
+    {
+        IUpgradeableCar Upgrade(IUpgradeableCar car);
+    }
 }

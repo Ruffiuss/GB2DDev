@@ -1,9 +1,12 @@
-﻿public class UpgradeHandelrStub : IUpgradeCarHandler
+﻿namespace Model
 {
-    public static IUpgradeCarHandler Default { get; } = new UpgradeHandelrStub();
-
-    public IUpgradeableCar Upgrade(IUpgradeableCar car)
+    public class UpgradeHandelrStub : IUpgradeCarHandler
     {
-        return car;
+        public static IUpgradeCarHandler Default { get; } = new UpgradeHandelrStub();
+
+        public IUpgradeableCar Upgrade(IUpgradeableCar car)
+        {
+            return car;
+        }
     }
 }

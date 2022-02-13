@@ -1,15 +1,20 @@
-﻿public class SpeedUpgradeHandler : IUpgradeCarHandler
+﻿using Data;
+
+namespace Model
 {
-    private readonly UpgradeItemConfig _config;
-
-    public SpeedUpgradeHandler(UpgradeItemConfig config)
+    public class SpeedUpgradeHandler : IUpgradeCarHandler
     {
-        _config = config;
-    }
+        private readonly UpgradeItemConfig _config;
 
-    public IUpgradeableCar Upgrade(IUpgradeableCar car)
-    {
-        car.Speed += _config.ValueUpgrade;
-        return car;
+        public SpeedUpgradeHandler(UpgradeItemConfig config)
+        {
+            _config = config;
+        }
+
+        public IUpgradeableCar Upgrade(IUpgradeableCar car)
+        {
+            car.Speed += _config.ValueUpgrade;
+            return car;
+        }
     }
 }

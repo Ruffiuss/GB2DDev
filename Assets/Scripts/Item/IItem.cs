@@ -1,5 +1,8 @@
-﻿public interface IItem
+﻿namespace ItemFeature
 {
-    int Id { get; set; }
-    ItemInfo Info { get; set; }
+    public interface IItem
+    {
+        int Id { get; set; }
+        ItemInfo Info { get; set; }
+    }
 }

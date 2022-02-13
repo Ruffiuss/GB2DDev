@@ -1,47 +1,46 @@
-﻿using System;
+﻿using Core;
+using Data;
+using System;
 using System.Collections.Generic;
 using Tools;
 
-public class UpgradeHandlerRepository : BaseController, IRepository<int, IUpgradeCarHandler>
+namespace Model
 {
-    public IReadOnlyDictionary<int, IUpgradeCarHandler> Content => _content;
-
-    private Dictionary<int, IUpgradeCarHandler> _content = new Dictionary<int, IUpgradeCarHandler>();
-
-    public UpgradeHandlerRepository(IReadOnlyList<UpgradeItemConfig> configs)
+    public class UpgradeHandlerRepository : BaseController, IRepository<int, IUpgradeCarHandler>
     {
-        PopulateItems(ref _content, configs);
-    }
-
-    private void PopulateItems(ref Dictionary<int, IUpgradeCarHandler> upgradeItems, IReadOnlyList<UpgradeItemConfig> configs)
-    {
-        foreach (var config in configs)
+        public IReadOnlyDictionary<int, IUpgradeCarHandler> Content => _content; private Dictionary<int, IUpgradeCarHandler> _content = new Dictionary<int, IUpgradeCarHandler>(); public UpgradeHandlerRepository(IReadOnlyList<UpgradeItemConfig> configs)
         {
-            upgradeItems[config.Id] = CreateHandler(config);
+            PopulateItems(ref _content, configs);
+        }
+        private void PopulateItems(ref Dictionary<int, IUpgradeCarHandler> upgradeItems, IReadOnlyList<UpgradeItemConfig> configs)
+        {
+            foreach (var config in configs)
+            {
+                upgradeItems[config.Id] = CreateHandler(config);
+            }
+        }
+        private IUpgradeCarHandler CreateHandler(UpgradeItemConfig config)
+        {
+            switch (config.UpgradeType)
+            {
+                case UpgradeType.None:
+                    return UpgradeHandelrStub.Default;
+                    break;
+                case UpgradeType.Speed:
+                    return new SpeedUpgradeHandler(config);
+                    break;
+                case UpgradeType.Control:
+                    return UpgradeHandelrStub.Default;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
-
-    private IUpgradeCarHandler CreateHandler(UpgradeItemConfig config)
+    
+    public interface IShedController
     {
-        switch (config.UpgradeType)
-        {
-            case UpgradeType.None:
-                return UpgradeHandelrStub.Default;
-                break;
-            case UpgradeType.Speed:
-                return new SpeedUpgradeHandler(config);
-                break;
-            case UpgradeType.Control:
-                return UpgradeHandelrStub.Default;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        void Enter();
+        void Exit();
     }
-}
-
-public interface IShedController
-{
-    void Enter();
-    void Exit();
 }

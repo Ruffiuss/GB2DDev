@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ItemFeature;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tools
+namespace Tools.RX
 {
     internal class SubscriptionAction : IReadOnlySubscriptionAction
     {
