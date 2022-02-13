@@ -32,7 +32,14 @@ public class InventoryModel : IInventoryModel
             Debug.Log($"{item.Info.Title} isEquiped {_items[item]}");
         }
         else
+        {
+            foreach (var item2 in _items)
+            {
+                if (item2.Key.Id == item.Id)
+                    return;
+            }
             _items.Add(item, true);
+        }
     }
 
     public void UnEquipItem(IItem item)
