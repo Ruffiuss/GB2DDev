@@ -49,7 +49,7 @@ public class InventoryController : BaseController, IInventoryController
 
     protected override void OnDispose()
     {
-        _inventoryView.Hide();
-        _inventoryView.OnDispose();
+        _inventoryView?.Hide();
+        _inventoryView?.OnDispose();
     }
 }

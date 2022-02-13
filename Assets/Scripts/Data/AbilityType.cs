@@ -1,5 +1,7 @@
 ﻿public enum AbilityType
 {
     None, 
-    Gun
+    Gun,
+    Protection,
+    Mobility
 }

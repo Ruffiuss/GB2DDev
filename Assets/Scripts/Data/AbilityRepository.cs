@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AbilityRepository : BaseController, IAbilityRepository
 {
@@ -8,8 +9,12 @@ public class AbilityRepository : BaseController, IAbilityRepository
 
     private Dictionary<int, IAbility> _abilitiesMap = new Dictionary<int, IAbility>();
 
-    public AbilityRepository(IReadOnlyList<AbilityItemConfig> abilities)
+    private readonly UnityAction<float> _abilityListener;
+
+    public AbilityRepository(IReadOnlyList<AbilityItemConfig> abilities, UnityAction<float> abilityListener)
     {
+        _abilityListener = abilityListener;
+
         foreach (var config in abilities)
         {
             _abilitiesMap[config.Id] = CreateAbility(config);
@@ -24,6 +29,12 @@ public class AbilityRepository : BaseController, IAbilityRepository
                 return AbilityStub.Default;
             case AbilityType.Gun:
                 return new GunAbility(config.View, config.value);
+            case AbilityType.Protection:
+                return AbilityStub.Default;
+                break;
+            case AbilityType.Mobility:
+                return new MobilityAbility(_abilityListener, config.value);
+                break;
             default:
                 throw new ArgumentOutOfRangeException();
         }

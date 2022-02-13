@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 148e224ffa39c9744b6b0d16fd5f2327, type: 3}
-  m_Name: Bomb
+  m_Name: TansmisionAbility
   m_EditorClassIdentifier: 
-  Item: {fileID: 11400000, guid: c8d3e74aaf2447344bd5a345943e75eb, type: 2}
+  Item: {fileID: 11400000, guid: 14a3c984e69e6504f801302ed22526ac, type: 2}
   View: {fileID: 4053592497838757858, guid: 44eb27282cac35e4bbc56d3fd9cc795e, type: 3}
-  Type: 1
+  Type: 3
   Sprite: {fileID: 0}
-  value: 250
+  value: 100

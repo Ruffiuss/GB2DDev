@@ -19,7 +19,7 @@ public class GameController : BaseController
         var carController = new CarController();
         AddController(carController);
 
-        var abilityRepository = new AbilityRepository(configs);
+        var abilityRepository = new AbilityRepository(configs, profilePlayer.CurrentCar.AbilityListener);
         var abilityViewPrefab = ResourceLoader.LoadPrefab(new ResourcePath() { PathResource = "Prefabs/AbilitiesGroupView" });
         var abilityGroupView = GameObject.Instantiate(abilityViewPrefab, placeForUI).GetComponent<AbilitiesGroupView>();
         var abilitiesController = new AbilitiesController(carController, inventoryModel, abilityRepository,

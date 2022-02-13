@@ -1,4 +1,6 @@
-﻿public class Car: IUpgradeableCar
+﻿using UnityEngine;
+
+public class Car: IUpgradeableCar
 {
     public float Speed { get; set; }
 
@@ -14,5 +16,8 @@
     {
         Speed = _defaultSpeed;
     }
-
+    public void AbilityListener(float speed)
+    {
+        Speed += speed;
+    }
 }
