@@ -4,19 +4,20 @@ using UnityEngine;
 public class ShedController : BaseController, IShedController
 {
     private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
+    private readonly IInventoryModel _model;
     private readonly UpgradeHandlerRepository _upgradeRepository;
     private readonly InventoryController _inventoryController;
-    private readonly InventoryModel _model;
     private readonly Transform _placeForUI;
     private readonly Car _car;
     private readonly ResourcePath _shedUIPrefabPath = new ResourcePath() { PathResource = "Prefabs/Inventory"};
     private readonly ResourcePath _shedItemPrefabPath = new ResourcePath() { PathResource = "Prefabs/InventoryItem"};
 
-    public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car, Transform placeForUI)
+    public ShedController(IInventoryModel model, IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car, Transform placeForUI)
     {
         _upgradeItems = upgradeItems;
         _car = car;
-        _model = new InventoryModel(true);
+        _model = model;
+        _model.IsInShed = true; 
         _placeForUI = placeForUI;
 
         _upgradeRepository = new UpgradeHandlerRepository(upgradeItems);
@@ -37,6 +38,13 @@ public class ShedController : BaseController, IShedController
     {
         UpgradeCarWithEquipedItems(_car, _model.GetEquippedItems(), _upgradeRepository.UpgradeItems);
         Debug.Log($"Exit, car speed = {_car.Speed}");
+    }
+
+    protected override void OnDispose()
+    {
+        _model.IsInShed = false;
+        _upgradeRepository?.Dispose();
+        _inventoryController?.Dispose();
     }
 
     private void UpgradeCarWithEquipedItems(IUpgradeableCar car,

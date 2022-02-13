@@ -5,14 +5,8 @@ using UnityEngine;
 public class InventoryModel : IInventoryModel
 {
     private readonly Dictionary<IItem, bool> _items = new Dictionary<IItem, bool>();
-    private bool _isInShed = false;
 
-    public bool IsInShed => _isInShed;
-
-    public InventoryModel(bool isInShed = false)
-    {
-        _isInShed = isInShed;
-    }
+    public bool IsInShed { get; set; }
 
     public IReadOnlyList<IItem> GetEquippedItems()
     {

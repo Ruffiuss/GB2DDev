@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 2
   _title: Transmision
+  _sprite: {fileID: 21300000, guid: 90f91bf07d6aec14bb60e830bf64792c, type: 3}

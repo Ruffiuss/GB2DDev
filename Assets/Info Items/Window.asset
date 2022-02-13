@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 2
   _title: Window
+  _sprite: {fileID: 7788287979965792003, guid: 907a19a0cc99bf04288d3b0c0d6afcfb, type: 3}

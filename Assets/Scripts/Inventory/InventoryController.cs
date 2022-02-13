@@ -8,7 +8,7 @@ public class InventoryController : BaseController, IInventoryController
 
     private IInventoryView _inventoryView;
 
-    public InventoryController(List<ItemConfig> itemConfigs, InventoryModel inventoryModel)
+    public InventoryController(List<ItemConfig> itemConfigs, IInventoryModel inventoryModel)
     {
         _inventoryModel = inventoryModel;
         _itemsRepository = new ItemsRepository(itemConfigs);
@@ -36,12 +36,20 @@ public class InventoryController : BaseController, IInventoryController
     {
         if (!_inventoryModel.IsInShed)
         {
-            var equippedItems = _inventoryModel.GetEquippedItems();
-            _inventoryView.Display(equippedItems);
+            foreach (var equipedItem in _inventoryModel.GetEquippedItems())
+            {
+                Debug.Log(equipedItem.Info.Title);
+            }
         }
         else
         {
             _inventoryView.Show();
         }
+    }
+
+    protected override void OnDispose()
+    {
+        _inventoryView.Hide();
+        _inventoryView.OnDispose();
     }
 }

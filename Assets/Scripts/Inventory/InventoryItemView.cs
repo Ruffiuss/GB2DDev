@@ -40,5 +40,12 @@ public class InventoryItemView : MonoBehaviour, IInventoryItemView
         _parentToggleHandler.Invoke(_item, isOn);
     }
 
+    public void OnDispose()
+    {
+        _toggle.onValueChanged.RemoveAllListeners();
+        _parentToggleHandler = null;
+        Destroy(gameObject);
+    }
+
     #endregion    
 }

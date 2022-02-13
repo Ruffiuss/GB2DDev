@@ -6,4 +6,5 @@ public interface IInventoryView
     void Display(IReadOnlyList<IItem> items);
     void Show();
     void Hide();
+    void OnDispose();
 }

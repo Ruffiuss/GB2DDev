@@ -55,5 +55,15 @@ public class InventoryView : MonoBehaviour, IInventoryView
         }
     }
 
+    public void OnDispose()
+    {
+        foreach (var item in _currentItems)
+        {
+            item.Value.OnDispose();
+        }
+        _currentItems.Clear();
+        Destroy(gameObject);
+    }
+
     #endregion
 }

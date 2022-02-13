@@ -16,12 +16,14 @@ public class MainController : BaseController
 
         OnChangeGameState(_profilePlayer.CurrentState.Value);
         profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
+        _inventoryModel = new InventoryModel();
     }
 
     private MainMenuController _mainMenuController;
     private ShedController _shedController;
     private GameController _gameController;
     private InventoryController _inventoryController;
+    private InventoryModel _inventoryModel;
     private readonly Transform _placeForUi;
     private readonly ProfilePlayer _profilePlayer;
     private readonly List<ItemConfig> _itemsConfig;
@@ -42,17 +44,17 @@ public class MainController : BaseController
         {
             case GameState.Start:
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
-                _shedController = new ShedController(_upgradeItems, _itemsConfig, _profilePlayer.CurrentCar, _placeForUi);
+                _shedController = new ShedController(_inventoryModel, _upgradeItems, _itemsConfig, _profilePlayer.CurrentCar, _placeForUi);
                 _shedController.Enter();
                 _shedController.Exit();
                 _gameController?.Dispose();
                 _inventoryController?.Dispose();
                 break;
             case GameState.Game:
-                var inventoryModel = new InventoryModel(false);
-                _inventoryController = new InventoryController(_itemsConfig, inventoryModel);
+                _shedController?.Dispose();
+                _inventoryController = new InventoryController(_itemsConfig, _inventoryModel);
                 _inventoryController.ShowInventory();
-                _gameController = new GameController(_profilePlayer, _abilityItems, inventoryModel, _placeForUi);
+                _gameController = new GameController(_profilePlayer, _abilityItems, _inventoryModel, _placeForUi);
                 _mainMenuController?.Dispose();
                 break;
             default:

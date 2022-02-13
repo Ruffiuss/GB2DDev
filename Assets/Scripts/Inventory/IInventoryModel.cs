@@ -2,7 +2,7 @@
 
 public interface IInventoryModel
 {
-    bool IsInShed { get; }
+    bool IsInShed { get; set; }
     IReadOnlyList<IItem> GetEquippedItems();
     IReadOnlyDictionary<IItem, bool> GetAllItems();
     void EquipItem(IItem item);
