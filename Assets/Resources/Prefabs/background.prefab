@@ -91,11 +91,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1670990735255490663}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
+  m_Script: {fileID: 11500000, guid: 129e7d313e03e0b478aa2371f3c6f44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _leftBorder: -17.81
-  _rightBorder: 17.82
+  _rightBorder: 17.81
   _relativeSpeedRate: 1
 --- !u!1 &2568450156852823711
 GameObject:
@@ -188,11 +188,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2568450156852823711}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
+  m_Script: {fileID: 11500000, guid: 129e7d313e03e0b478aa2371f3c6f44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftBorder: -20.45
-  _rightBorder: 20.46
+  _leftBorder: -20.44
+  _rightBorder: 20.45
   _relativeSpeedRate: 0.3
 --- !u!1 &2807479611546755954
 GameObject:
@@ -203,6 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5432084578531805737}
+  - component: {fileID: 3306229729818310293}
   m_Layer: 0
   m_Name: background
   m_TagString: Untagged
@@ -225,6 +226,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3306229729818310293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2807479611546755954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff9a97b6dbf2c4409a29a8407b00b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _backgrounds:
+  - {fileID: 4491843096377460275}
+  - {fileID: 2456894769269428648}
+  - {fileID: 2418015379518058441}
+  - {fileID: 140737336}
+  - {fileID: 1589075209}
+  - {fileID: 1190817787}
 --- !u!1 &3326407923804462301
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,11 +336,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3326407923804462301}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
+  m_Script: {fileID: 11500000, guid: 129e7d313e03e0b478aa2371f3c6f44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftBorder: -17.81
-  _rightBorder: 17.82
+  _leftBorder: -17.7
+  _rightBorder: 17.7
   _relativeSpeedRate: 1
 --- !u!1 &3590461184429166328
 GameObject:
@@ -413,11 +433,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3590461184429166328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
+  m_Script: {fileID: 11500000, guid: 129e7d313e03e0b478aa2371f3c6f44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _leftBorder: -17.81
-  _rightBorder: 17.82
+  _rightBorder: 17.81
   _relativeSpeedRate: 1
 --- !u!1 &5625024096290961257
 GameObject:
@@ -510,11 +530,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5625024096290961257}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
+  m_Script: {fileID: 11500000, guid: 129e7d313e03e0b478aa2371f3c6f44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftBorder: -20.45
-  _rightBorder: 20.46
+  _leftBorder: -20.44
+  _rightBorder: 20.45
   _relativeSpeedRate: 0.3
 --- !u!1 &7039704320274304650
 GameObject:
@@ -607,11 +627,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7039704320274304650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b368719156d46474b852e8c56e609477, type: 3}
+  m_Script: {fileID: 11500000, guid: 129e7d313e03e0b478aa2371f3c6f44a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leftBorder: -20.45
-  _rightBorder: 20.46
+  _leftBorder: -20.44
+  _rightBorder: 20.45
   _relativeSpeedRate: 0.3
 --- !u!1 &8833280361136734726
 GameObject:
@@ -622,6 +642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7374595844525518469}
+  - component: {fileID: 937913601617304419}
   m_Layer: 0
   m_Name: tape
   m_TagString: Untagged
@@ -649,3 +670,16 @@ Transform:
   m_Father: {fileID: 5432084578531805737}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &937913601617304419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8833280361136734726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff9a97b6dbf2c4409a29a8407b00b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _backgrounds: []
