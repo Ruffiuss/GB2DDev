@@ -3,7 +3,7 @@
 namespace Data
 {
     [CreateAssetMenu(fileName = "Item", menuName = "Item")]
-    public class ItemConfig : ScriptableObject
+    public class ItemConfig : ScriptableObject, IConfig
     {
         [SerializeField]
         private int _id;

@@ -8,10 +8,14 @@ namespace Model
 {
     public class UpgradeHandlerRepository : BaseController, IRepository<int, IUpgradeCarHandler>
     {
-        public IReadOnlyDictionary<int, IUpgradeCarHandler> Content => _content; private Dictionary<int, IUpgradeCarHandler> _content = new Dictionary<int, IUpgradeCarHandler>(); public UpgradeHandlerRepository(IReadOnlyList<UpgradeItemConfig> configs)
+        public IReadOnlyDictionary<int, IUpgradeCarHandler> Content => _content;
+        private Dictionary<int, IUpgradeCarHandler> _content = new Dictionary<int, IUpgradeCarHandler>();
+        
+        public UpgradeHandlerRepository(IReadOnlyList<UpgradeItemConfig> configs)
         {
             PopulateItems(ref _content, configs);
         }
+
         private void PopulateItems(ref Dictionary<int, IUpgradeCarHandler> upgradeItems, IReadOnlyList<UpgradeItemConfig> configs)
         {
             foreach (var config in configs)
@@ -19,6 +23,7 @@ namespace Model
                 upgradeItems[config.Id] = CreateHandler(config);
             }
         }
+
         private IUpgradeCarHandler CreateHandler(UpgradeItemConfig config)
         {
             switch (config.UpgradeType)

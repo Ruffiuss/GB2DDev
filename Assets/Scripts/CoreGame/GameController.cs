@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Core;
 using Data;
 using Features.AbilitiesFeature;
@@ -13,7 +14,9 @@ namespace CoreGame
 {
     public class GameController : BaseController
     {
-        public GameController(ProfilePlayer profilePlayer, IReadOnlyList<AbilityItemConfig> configs, InventoryModel inventoryModel, Transform uiRoot)
+        private readonly List<AbilityItemConfig> _abilityItemsConfig;
+
+        public GameController(ProfilePlayer profilePlayer, InventoryModel inventoryModel, Transform uiRoot)
         {
             var leftMoveDiff = new SubscriptionProperty<float>();
             var rightMoveDiff = new SubscriptionProperty<float>();
@@ -27,10 +30,15 @@ namespace CoreGame
             var carController = new CarController();
             AddController(carController);
 
-            var abilityRepository = new AbilityRepository(configs);
+            _abilityItemsConfig = ResourceLoader.LoadDataSource<AbilityItemConfig>(new ResourcePath()
+            { PathResource = "Data/AbilityItemsSource" }).ToList();
+
+            var abilityRepository = new AbilityRepository(_abilityItemsConfig);
+
             var abilityView =
                 ResourceLoader.LoadAndInstantiateView<AbilitiesView>(
                     new ResourcePath() { PathResource = "Prefabs/AbilitiesView" }, uiRoot);
+
             var abilitiesController = new AbilitiesController(carController, inventoryModel, abilityRepository,
                 abilityView);
             AddController(abilitiesController);

@@ -3,7 +3,7 @@
 namespace Data
 {
     [CreateAssetMenu(fileName = "UpgradeItem", menuName = "UpgradeItem")]
-    public class UpgradeItemConfig : ScriptableObject
+    public class UpgradeItemConfig : ScriptableObject, IConfig
     {
         [SerializeField] private ItemConfig _itemConfig;
         [SerializeField] private UpgradeType _upgradeType;

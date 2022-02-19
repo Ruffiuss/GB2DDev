@@ -23,9 +23,10 @@ namespace Tools.ResourceManagement
             return go.GetComponent<T>();
         }
 
-        public static BaseDataSource<T> LoadDataSource<T>(ResourcePath path) where T : ScriptableObject
+        public static T[] LoadDataSource<T>(ResourcePath path) where T : IConfig
         {
-            return Resources.Load<BaseDataSource<T>>(path.PathResource);
+            var source = Resources.Load<BaseDataSource<T>>(path.PathResource);
+            return source.Content;
         }
     }
 }

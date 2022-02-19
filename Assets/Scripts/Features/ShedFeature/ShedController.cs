@@ -4,23 +4,30 @@ using Features.InventoryFeature;
 using ItemFeature;
 using Model;
 using System.Collections.Generic;
+using System.Linq;
+using Tools.ResourceManagement;
 using UnityEngine;
 
 namespace Features.ShedFeature
 {
     public class ShedController : BaseController, IShedController
     {
-        private readonly IReadOnlyList<UpgradeItemConfig> _upgradeItems;
+
+        private readonly List<UpgradeItemConfig> _upgradesConfig;
         private readonly Car _car;
         private readonly UpgradeHandlerRepository _upgradeRepository;
         private readonly InventoryController _inventoryController;
         private readonly InventoryModel _model;
 
-        public ShedController(IReadOnlyList<UpgradeItemConfig> upgradeItems, List<ItemConfig> items, Car car)
+        public ShedController(List<ItemConfig> items, Car car)
         {
-            _upgradeItems = upgradeItems;
+            _upgradesConfig = ResourceLoader.LoadDataSource<UpgradeItemConfig>(
+                new ResourcePath(){
+                    PathResource = "Data/UpgradesSource" })
+                .ToList();
+
             _car = car;
-            _upgradeRepository = new UpgradeHandlerRepository(upgradeItems);
+            _upgradeRepository = new UpgradeHandlerRepository(_upgradesConfig);
 
             _model = new InventoryModel();
             AddController(_upgradeRepository);

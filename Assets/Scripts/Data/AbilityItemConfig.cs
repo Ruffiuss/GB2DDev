@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Data
 {
     [CreateAssetMenu(fileName = "AbilityItem", menuName = "AbilityItem", order = 0)]
-    public class AbilityItemConfig : ScriptableObject
+    public class AbilityItemConfig : ScriptableObject, IConfig
     {
         public ItemConfig Item;
         public GameObject View;

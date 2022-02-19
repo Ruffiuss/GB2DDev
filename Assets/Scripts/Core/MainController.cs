@@ -17,20 +17,10 @@ namespace Core
             _profilePlayer = profilePlayer;
             _placeForUi = placeForUi;
 
-            var itemsSource =
-                ResourceLoader.LoadDataSource<ItemConfig>(new ResourcePath()
-                { PathResource = "Data/ItemsSource" });
-            _itemsConfig = itemsSource.Content.ToList();
-
-            var upgradeSource = 
-                ResourceLoader.LoadDataSource<UpgradeItemConfig>(new ResourcePath()
-                { PathResource = "Data/UpgradesSource" });
-            _upgradesConfig = upgradeSource.Content.ToList();
-
-            var abilityItemsSource =
-                ResourceLoader.LoadDataSource<AbilityItemConfig>(new ResourcePath()
-                { PathResource = "Data/AbilityItemConfig" });
-            _abilityItemsConfig = abilityItemsSource.Content.ToList();
+            _itemsConfig = ResourceLoader.LoadDataSource<ItemConfig>(
+                new ResourcePath(){
+                    PathResource = "Data/ItemsSource" })
+                .ToList();
 
             OnChangeGameState(_profilePlayer.CurrentState.Value);
             profilePlayer.CurrentState.SubscribeOnChange(OnChangeGameState);
@@ -43,8 +33,6 @@ namespace Core
         private readonly Transform _placeForUi;
         private readonly ProfilePlayer _profilePlayer;
         private readonly List<ItemConfig> _itemsConfig;
-        private readonly List<UpgradeItemConfig> _upgradesConfig;
-        private readonly List<AbilityItemConfig> _abilityItemsConfig;
 
         protected override void OnDispose()
         {
@@ -60,7 +48,7 @@ namespace Core
             {
                 case GameState.Start:
                     _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
-                    _shedController = new ShedController(_upgradesConfig, _itemsConfig, _profilePlayer.CurrentCar);
+                    _shedController = new ShedController(_itemsConfig, _profilePlayer.CurrentCar);
                     _shedController.Enter();
                     _shedController.Exit();
                     _gameController?.Dispose();
@@ -70,7 +58,7 @@ namespace Core
                     var inventoryModel = new InventoryModel();
                     _inventoryController = new InventoryController(_itemsConfig, inventoryModel);
                     _inventoryController.ShowInventory();
-                    _gameController = new GameController(_profilePlayer, _abilityItemsConfig, inventoryModel, _placeForUi);
+                    _gameController = new GameController(_profilePlayer, inventoryModel, _placeForUi);
                     _mainMenuController?.Dispose();
                     break;
                 default:
