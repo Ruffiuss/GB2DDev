@@ -61,6 +61,12 @@ namespace Core
                     _gameController = new GameController(_profilePlayer, inventoryModel, _placeForUi);
                     _mainMenuController?.Dispose();
                     break;
+                case GameState.None:
+                    break;
+                case GameState.Fight:
+                    break;
+                case GameState.Reward:
+                    break;
                 default:
                     AllClear();
                     break;

@@ -16,7 +16,7 @@ namespace Core
             _profilePlayer = profilePlayer;
             _view = LoadView(placeForUi);
             AddGameObjects(_view.gameObject);
-            _view.Init(StartGame);
+            _view.Init(StartGame, ViewRewards, ExitGame);
         }
 
         private MainMenuView LoadView(Transform placeForUi)
@@ -29,8 +29,20 @@ namespace Core
             _profilePlayer.CurrentState.Value = GameState.Game;
 
             _profilePlayer.AnalyticTools.SendMessage("start_game",
-                new Dictionary<string, object>() { {"time", Time.realtimeSinceStartup }
-        });
+                new Dictionary<string, object>(){
+                    {"time", Time.realtimeSinceStartup }
+                });
+        }
+
+        private void ViewRewards()
+        {
+
+        }
+
+
+        private void ExitGame()
+        {
+
         }
     }
 }
