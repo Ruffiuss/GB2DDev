@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Data;
+﻿using Features.RewardsFeature;
 using Model;
 using Model.Analytic;
 using Tools.Ads;
@@ -10,10 +8,9 @@ namespace Core
 {
     public class Root : MonoBehaviour
     {
-        [SerializeField]
-        private Transform _placeForUi;
-
+        [SerializeField] private Transform _placeForUi;
         [SerializeField] private UnityAdsTools _ads;
+        [SerializeField] private PlayerRewardDataHandler _dataSaver;
 
         private MainController _mainController;
         private IAnalyticTools _analyticsTools;
@@ -22,7 +19,7 @@ namespace Core
         {
             _analyticsTools = new UnityAnalyticTools();
             var profilePlayer = new ProfilePlayer(15f, _ads, _analyticsTools);
-            _mainController = new MainController(_placeForUi, profilePlayer);
+            _mainController = new MainController(_placeForUi, profilePlayer, _dataSaver);
             profilePlayer.CurrentState.Value = GameState.Start;
         }
 

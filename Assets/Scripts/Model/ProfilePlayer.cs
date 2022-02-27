@@ -1,4 +1,5 @@
-﻿using Model.Analytic;
+﻿using Features.RewardsFeature;
+using Model.Analytic;
 using Tools.Ads;
 using Tools.RX;
 
@@ -21,5 +22,7 @@ namespace Model
         public SubscriptionProperty<GameState> CurrentState { get; }
 
         public Car CurrentCar { get; }
+
+        public PlayerRewardData RewardData { get; }
     }
 }

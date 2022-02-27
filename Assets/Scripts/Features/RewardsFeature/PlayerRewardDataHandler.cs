@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Tools.RX;
 using UnityEngine;
 
 namespace Features.RewardsFeature
@@ -19,42 +20,42 @@ namespace Features.RewardsFeature
 
         public int WoodCount
         {
-            get => _currentPlayerRewardData.WoodCount;
-            set => _currentPlayerRewardData.WoodCount = value;
+            get => _currentPlayerRewardData.WoodCount.Value;
+            set => _currentPlayerRewardData.WoodCount.Value = value;
         }
 
         public int DimondCount
         {
-            get => _currentPlayerRewardData.DiamondCount;
-            set => _currentPlayerRewardData.DiamondCount = value;
+            get => _currentPlayerRewardData.DiamondCount.Value;
+            set => _currentPlayerRewardData.DiamondCount.Value = value;
         }
 
         public int ActiveSlotKeyDaily
         {
-            get => _currentPlayerRewardData.ActiveSlotKeyDaily;
-            set => _currentPlayerRewardData.ActiveSlotKeyDaily = value;
+            get => _currentPlayerRewardData.ActiveSlotKeyDaily.Value;
+            set => _currentPlayerRewardData.ActiveSlotKeyDaily.Value = value;
         }
 
         public int ActiveSlotKeyWeekly
         {
-            get => _currentPlayerRewardData.ActiveSlotKeyWeekly;
-            set => _currentPlayerRewardData.ActiveSlotKeyWeekly = value;
+            get => _currentPlayerRewardData.ActiveSlotKeyWeekly.Value;
+            set => _currentPlayerRewardData.ActiveSlotKeyWeekly.Value = value;
         }
 
         public DateTime? LastTimeKeyDaily
         {
             get
             {
-                if (string.IsNullOrEmpty(_currentPlayerRewardData.LastTimeKeyDaily))
+                if (!_currentPlayerRewardData.LastTimeKeyDaily.Value.HasValue)
                     return null;
-                return DateTime.Parse(_currentPlayerRewardData.LastTimeKeyDaily);
+                return _currentPlayerRewardData.LastTimeKeyDaily.Value;
             }
             set
             {
                 if (value != null)
-                    _currentPlayerRewardData.LastTimeKeyDaily = value.ToString();
+                    _currentPlayerRewardData.LastTimeKeyDaily.Value = value;
                 else
-                    _currentPlayerRewardData.LastTimeKeyDaily = default;
+                    _currentPlayerRewardData.LastTimeKeyDaily.Value = default;
             }
         }
 
@@ -62,16 +63,16 @@ namespace Features.RewardsFeature
         {
             get
             {
-                if (string.IsNullOrEmpty(_currentPlayerRewardData.LastTimeKeyWeekly))
+                if (_currentPlayerRewardData.LastTimeKeyWeekly.Value.HasValue)
                     return null;
-                return DateTime.Parse(_currentPlayerRewardData.LastTimeKeyWeekly);
+                return _currentPlayerRewardData.LastTimeKeyWeekly.Value;
             }
             set
             {
                 if (value != null)
-                    _currentPlayerRewardData.LastTimeKeyWeekly = value.ToString();
+                    _currentPlayerRewardData.LastTimeKeyWeekly.Value = value;
                 else
-                    _currentPlayerRewardData.LastTimeKeyWeekly = default;
+                    _currentPlayerRewardData.LastTimeKeyWeekly.Value = default;
             }
         }
 
@@ -105,6 +106,7 @@ namespace Features.RewardsFeature
         public void SaveData()
         {
             var jsonString = JsonUtility.ToJson(_currentPlayerRewardData);
+            var jsonString2 = JsonUtility.ToJson(new SubscriptionProperty<int>());
             File.WriteAllText(Application.dataPath + SaveFolder + SaveFileName, jsonString);
         }
 

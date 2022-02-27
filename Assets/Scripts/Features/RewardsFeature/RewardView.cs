@@ -1,17 +1,18 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Features.RewardsFeature
 {
-    public class RewardView : MonoBehaviour
+    public class RewardView : MonoBehaviour, IView
     {
         #region Fields
-        [SerializeField]
+
         private PlayerRewardDataHandler _dataSaver;
+
         [Header("Daily time settings")]
         [SerializeField]
         public int DailyTimeCooldown = 5;
@@ -26,6 +27,10 @@ namespace Features.RewardsFeature
         public List<Reward> DailyRewards;
         public List<Reward> WeeklyRewards;
         [Header("UI")]
+        [SerializeField]
+        private TextMeshProUGUI _diamondText;
+        [SerializeField]
+        private TextMeshProUGUI _woodText;
         [SerializeField]
         public Slider DailyRewardTimer;
         [SerializeField]
@@ -44,7 +49,22 @@ namespace Features.RewardsFeature
         public Button GetDailyRewardButton;
         [SerializeField]
         public Button GetWeeklyRewardButton;
+
         #endregion
+
+        #region Properties
+
+        private int Wood
+        {
+            get => _dataSaver.WoodCount;
+            set => _dataSaver.WoodCount = value;
+        }
+
+        private int Diamond
+        {
+            get => _dataSaver.DimondCount;
+            set => _dataSaver.DimondCount = value;
+        }
 
         public int CurrentActiveSlotDaily
         {
@@ -70,6 +90,14 @@ namespace Features.RewardsFeature
             set => _dataSaver.LastTimeKeyWeekly = value;
         }
 
+        #endregion
+
+        #region UnityMethods
+
+        private void Start()
+        {
+            RefreshText();
+        }
 
         private void OnDestroy()
         {
@@ -78,5 +106,45 @@ namespace Features.RewardsFeature
             ResetButton.onClick.RemoveAllListeners();
         }
 
+        #endregion
+
+        #region Methods
+
+        public void InitSaver(PlayerRewardDataHandler dataSaver)
+        {
+            _dataSaver = dataSaver;
+        }
+
+        private void RefreshText()
+        {
+            if (_diamondText != null)
+                _diamondText.text = Diamond.ToString();
+            if (_woodText != null)
+                _woodText.text = Wood.ToString();
+        }
+
+        public void AddDiamond(int count)
+        {
+            Diamond += count;
+            RefreshText();
+        }
+
+        public void AddWood(int count)
+        {
+            Wood += count;
+            RefreshText();
+        }
+
+        public void Show()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Hide()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

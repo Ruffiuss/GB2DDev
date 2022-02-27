@@ -16,7 +16,7 @@ namespace Tools.ResourceManagement
             return Resources.Load<T>(path.PathResource);
         }
 
-        public static T LoadAndInstantiateView<T>(ResourcePath path, Transform uiRoot) where T : Component, IView
+        public static T LoadAndInstantiateView<T>(ResourcePath path, Transform uiRoot = default) where T : Component, IView
         {
             var prefab = Resources.Load<GameObject>(path.PathResource);
             var go = Object.Instantiate(prefab, uiRoot);

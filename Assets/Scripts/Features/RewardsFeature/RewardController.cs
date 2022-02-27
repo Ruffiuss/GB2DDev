@@ -1,22 +1,29 @@
-﻿using System;
+﻿using Core;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Tools.ResourceManagement;
 using UnityEngine;
 
 namespace Features.RewardsFeature
 {
-    public class RewardController
+    public class RewardController : BaseController
     {
+
         private readonly RewardView _rewardView;
+        private readonly PlayerRewardDataHandler _dataSaver;
         private List<SlotRewardView> _dailySlots;
         private List<SlotRewardView> _weeklySlots;
 
         private bool _dailyRewardReceived = false;
         private bool _weeklyRewardReceived = false;
 
-        public RewardController(RewardView rewardView)
+        public RewardController(Transform uiRoot, PlayerRewardDataHandler dataSaver)
         {
-            _rewardView = rewardView;
+            _dataSaver = dataSaver;
+            _rewardView = ResourceLoader.LoadAndInstantiateView<RewardView>(new ResourcePath() { PathResource = "Prefabs/RewardWindow" });
+            _rewardView.InitSaver(_dataSaver);
+            AddGameObjects(_rewardView.gameObject);
             InitSlots();
             RefreshUi();
             _rewardView.StartCoroutine(UpdateCoroutine());
@@ -159,10 +166,10 @@ namespace Features.RewardsFeature
                 case RewardType.None:
                     break;
                 case RewardType.Wood:
-                    CurrencyWindow.Instance.AddWood(reward.Count);
+                    _rewardView.AddWood(reward.Count);
                     break;
                 case RewardType.Diamond:
-                    CurrencyWindow.Instance.AddDiamond(reward.Count);
+                    _rewardView.AddDiamond(reward.Count);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -183,10 +190,10 @@ namespace Features.RewardsFeature
                 case RewardType.None:
                     break;
                 case RewardType.Wood:
-                    CurrencyWindow.Instance.AddWood(reward.Count);
+                    _rewardView.AddWood(reward.Count);
                     break;
                 case RewardType.Diamond:
-                    CurrencyWindow.Instance.AddDiamond(reward.Count);
+                    _rewardView.AddDiamond(reward.Count);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

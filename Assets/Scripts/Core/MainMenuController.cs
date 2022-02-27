@@ -36,7 +36,7 @@ namespace Core
 
         private void ViewRewards()
         {
-
+            _profilePlayer.CurrentState.Value = GameState.Reward;
         }
 
 

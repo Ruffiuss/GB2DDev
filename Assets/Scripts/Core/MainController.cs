@@ -1,6 +1,7 @@
 ﻿using CoreGame;
 using Data;
 using Features.InventoryFeature;
+using Features.RewardsFeature;
 using Features.ShedFeature;
 using Model;
 using System.Collections.Generic;
@@ -12,10 +13,11 @@ namespace Core
 {
     public class MainController : BaseController
     {
-        public MainController(Transform placeForUi, ProfilePlayer profilePlayer)
+        public MainController(Transform placeForUi, ProfilePlayer profilePlayer, PlayerRewardDataHandler dataSaver)
         {
             _profilePlayer = profilePlayer;
             _placeForUi = placeForUi;
+            _dataSaver = dataSaver;
 
             _itemsConfig = ResourceLoader.LoadDataSource<ItemConfig>(
                 new ResourcePath(){
@@ -30,7 +32,9 @@ namespace Core
         private ShedController _shedController;
         private GameController _gameController;
         private InventoryController _inventoryController;
+        private RewardController _rewardController;
         private readonly Transform _placeForUi;
+        private readonly PlayerRewardDataHandler _dataSaver;
         private readonly ProfilePlayer _profilePlayer;
         private readonly List<ItemConfig> _itemsConfig;
 
@@ -46,6 +50,8 @@ namespace Core
         {
             switch (state)
             {
+                case GameState.None:
+                    break;
                 case GameState.Start:
                     _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
                     _shedController = new ShedController(_itemsConfig, _profilePlayer.CurrentCar);
@@ -61,11 +67,11 @@ namespace Core
                     _gameController = new GameController(_profilePlayer, inventoryModel, _placeForUi);
                     _mainMenuController?.Dispose();
                     break;
-                case GameState.None:
-                    break;
                 case GameState.Fight:
                     break;
                 case GameState.Reward:
+                    _mainMenuController?.Dispose();
+                    _rewardController = new RewardController(_placeForUi, _dataSaver);
                     break;
                 default:
                     AllClear();

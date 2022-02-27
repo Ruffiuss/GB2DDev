@@ -1,14 +1,20 @@
-﻿namespace Features.RewardsFeature
+﻿using System;
+using Tools.RX;
+
+namespace Features.RewardsFeature
 {
     public class PlayerRewardData
     {
-        public string LastTimeKeyDaily;
-        public string LastTimeKeyWeekly;
+        public SubscriptionProperty<DateTime?> LastTimeKeyDaily = new SubscriptionProperty<DateTime?>();
+        public SubscriptionProperty<DateTime?> LastTimeKeyWeekly = new SubscriptionProperty<DateTime?>();
 
-        public int ActiveSlotKeyDaily;
-        public int ActiveSlotKeyWeekly;
+        public SubscriptionProperty<int> ActiveSlotKeyDaily = new SubscriptionProperty<int>();
+        public SubscriptionProperty<int> ActiveSlotKeyWeekly = new SubscriptionProperty<int>();
 
-        public int WoodCount;
-        public int DiamondCount;
+        public SubscriptionProperty<int> WoodCount = new SubscriptionProperty<int>();
+        public SubscriptionProperty<int> DiamondCount = new SubscriptionProperty<int>();
+
+        private int _wood;
+        private int _dimond;
     }
 }
