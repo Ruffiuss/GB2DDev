@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
 using Tools.RX;
 using UnityEngine;
@@ -63,7 +64,7 @@ namespace Features.RewardsFeature
         {
             get
             {
-                if (_currentPlayerRewardData.LastTimeKeyWeekly.Value.HasValue)
+                if (!_currentPlayerRewardData.LastTimeKeyWeekly.Value.HasValue)
                     return null;
                 return _currentPlayerRewardData.LastTimeKeyWeekly.Value;
             }
@@ -105,8 +106,7 @@ namespace Features.RewardsFeature
 
         public void SaveData()
         {
-            var jsonString = JsonUtility.ToJson(_currentPlayerRewardData);
-            var jsonString2 = JsonUtility.ToJson(new SubscriptionProperty<int>());
+            var jsonString = JsonConvert.SerializeObject(_currentPlayerRewardData);
             File.WriteAllText(Application.dataPath + SaveFolder + SaveFileName, jsonString);
         }
 
@@ -115,7 +115,7 @@ namespace Features.RewardsFeature
             if (_currentPlayerRewardData is null)
             {
                 var jsonString = File.ReadAllText(Application.dataPath + SaveFolder + SaveFileName);
-                var data = JsonUtility.FromJson<PlayerRewardData>(jsonString);
+                var data = JsonConvert.DeserializeObject<PlayerRewardData>(jsonString);
                 if (data is null)
                     return InitDefault();
                 else return data;

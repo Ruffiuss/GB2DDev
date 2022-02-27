@@ -13,8 +13,5 @@ namespace Features.RewardsFeature
 
         public SubscriptionProperty<int> WoodCount = new SubscriptionProperty<int>();
         public SubscriptionProperty<int> DiamondCount = new SubscriptionProperty<int>();
-
-        private int _wood;
-        private int _dimond;
     }
 }
