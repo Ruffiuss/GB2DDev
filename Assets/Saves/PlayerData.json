@@ -1,8 +1,1 @@
-{
-  "ActiveSlotKeyDaily": null,
-  "ActiveSlotKeyWeekly": null,
-  "DiamondCount": 0,
-  "LastTimeKeyDaily": null,
-  "LastTimeKeyWeekly": null,
-  "WoodCount": 0
-}
+{"LastTimeKeyDaily":{"Value":null},"LastTimeKeyWeekly":{"Value":"2022-02-28T18:01:10.8356677Z"},"ActiveSlotKeyDaily":{"Value":0},"ActiveSlotKeyWeekly":{"Value":2},"WoodCount":{"Value":2900},"DiamondCount":{"Value":520}}
