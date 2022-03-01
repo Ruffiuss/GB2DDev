@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UI;
 
 namespace Features.FightsFeature
 {
-    public class FightWindowView : MonoBehaviour
+    public class FightWindowView : MonoBehaviour, IView
     {
         [SerializeField]
         private TMP_Text _countMoneyText;
@@ -201,6 +202,16 @@ namespace Features.FightsFeature
             }
 
             _countPowerEnemyText.text = $"Enemy power: {_enemy.Power}";
+        }
+
+        public void Show()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Hide()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UI;
@@ -12,6 +13,7 @@ namespace Features.RewardsFeature
         #region Fields
 
         private PlayerRewardDataHandler _dataSaver;
+        private ProfilePlayer _profilePlayer;
 
         [Header("Daily time settings")]
         [SerializeField]

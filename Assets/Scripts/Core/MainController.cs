@@ -1,5 +1,6 @@
 ﻿using CoreGame;
 using Data;
+using Features.FightsFeature;
 using Features.InventoryFeature;
 using Features.RewardsFeature;
 using Features.ShedFeature;
@@ -59,6 +60,7 @@ namespace Core
                     _shedController.Exit();
                     _gameController?.Dispose();
                     _inventoryController?.Dispose();
+                    _rewardController?.Dispose();
                     break;
                 case GameState.Game:
                     var inventoryModel = new InventoryModel();
@@ -71,7 +73,7 @@ namespace Core
                     break;
                 case GameState.Reward:
                     _mainMenuController?.Dispose();
-                    _rewardController = new RewardController(_placeForUi, _dataSaver);
+                    _rewardController = new RewardController(_placeForUi, _dataSaver, _profilePlayer);
                     break;
                 default:
                     AllClear();

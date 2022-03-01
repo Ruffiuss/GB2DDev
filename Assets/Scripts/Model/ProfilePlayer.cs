@@ -7,12 +7,22 @@ namespace Model
 {
     public class ProfilePlayer
     {
-        public ProfilePlayer(float speedCar, IAdsShower adsShower, IAnalyticTools analyticTools)
+        private readonly PlayerRewardDataHandler _dataSaver;
+
+        public ProfilePlayer(float speedCar, IAdsShower adsShower, IAnalyticTools analyticTools, PlayerRewardDataHandler dataSaver)
         {
+            _dataSaver = dataSaver;
+            InitRewardData();
+
             CurrentState = new SubscriptionProperty<GameState>();
             CurrentCar = new Car(speedCar);
             AdsShower = adsShower;
             AnalyticTools = analyticTools;
+        }
+
+        private void InitRewardData()
+        {
+            RewardData = _dataSaver.LoadData();
         }
 
         public IAdsShower AdsShower { get; }
@@ -23,6 +33,6 @@ namespace Model
 
         public Car CurrentCar { get; }
 
-        public PlayerRewardData RewardData { get; }
+        public PlayerRewardData RewardData { get; private set; }
     }
 }

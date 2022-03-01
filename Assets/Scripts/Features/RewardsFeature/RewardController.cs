@@ -1,4 +1,5 @@
 ﻿using Core;
+using Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,21 +12,24 @@ namespace Features.RewardsFeature
     {
 
         private readonly RewardView _rewardView;
-        private readonly PlayerRewardDataHandler _dataSaver;
+        private readonly ProfilePlayer _profilePlayer;
         private List<SlotRewardView> _dailySlots;
         private List<SlotRewardView> _weeklySlots;
 
         private bool _dailyRewardReceived = false;
         private bool _weeklyRewardReceived = false;
 
-        public RewardController(Transform uiRoot, PlayerRewardDataHandler dataSaver)
+        public RewardController(Transform uiRoot, PlayerRewardDataHandler dataSaver, ProfilePlayer profilePlayer)
         {
-            _dataSaver = dataSaver;
+            _profilePlayer = profilePlayer;
+
             _rewardView = ResourceLoader.LoadAndInstantiateView<RewardView>(new ResourcePath() { PathResource = "Prefabs/RewardWindow" });
-            _rewardView.InitSaver(_dataSaver);
+            _rewardView.InitSaver(dataSaver);
             AddGameObjects(_rewardView.gameObject);
+
             InitSlots();
             RefreshUi();
+
             _rewardView.StartCoroutine(UpdateCoroutine());
             SubscribeButtons();
         }
@@ -43,6 +47,15 @@ namespace Features.RewardsFeature
         {
             RefreshRewardState();
             RefreshUi();
+        }
+
+        protected override void OnDispose()
+        {
+            _rewardView.GetDailyRewardButton.onClick.RemoveAllListeners();
+            _rewardView.GetWeeklyRewardButton.onClick.RemoveAllListeners();
+            _rewardView.ResetButton.onClick.RemoveAllListeners();
+            _rewardView.ExitButton.onClick.RemoveAllListeners();
+            base.OnDispose();
         }
 
         private void RefreshRewardState()
@@ -146,6 +159,13 @@ namespace Features.RewardsFeature
             _rewardView.GetDailyRewardButton.onClick.AddListener(ClaimReward);
             _rewardView.GetWeeklyRewardButton.onClick.AddListener(ClaimWeeklyReward);
             _rewardView.ResetButton.onClick.AddListener(ResetReward);
+            _rewardView.ExitButton.onClick.AddListener(Exit);
+        }
+
+        private void Exit()
+        {
+            _profilePlayer.CurrentState.Value = GameState.Start;
+            OnDispose();
         }
 
         private void ResetReward()

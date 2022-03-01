@@ -18,7 +18,7 @@ namespace Core
         private void Awake()
         {
             _analyticsTools = new UnityAnalyticTools();
-            var profilePlayer = new ProfilePlayer(15f, _ads, _analyticsTools);
+            var profilePlayer = new ProfilePlayer(15f, _ads, _analyticsTools, _dataSaver);
             _mainController = new MainController(_placeForUi, profilePlayer, _dataSaver);
             profilePlayer.CurrentState.Value = GameState.Start;
         }
