@@ -422,6 +422,11 @@ MonoBehaviour:
   _placeForUi: {fileID: 1903552}
   _ads: {fileID: 1980575211}
   _dataSaver: {fileID: 1980575212}
+  _mainMenuAsset:
+    m_AssetGUID: f73b5ceaabd6ca94b894ab0f3d4f7577
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!114 &1980575211
 MonoBehaviour:
   m_ObjectHideFlags: 0
