@@ -1,27 +1,32 @@
 ﻿using System.Collections.Generic;
 using Model;
-using Tools.ResourceManagement;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Core
 {
     public class MainMenuController : BaseController
     {
-        private readonly ResourcePath _viewPath = new ResourcePath { PathResource = "Prefabs/mainMenu" };
         private readonly ProfilePlayer _profilePlayer;
-        private readonly MainMenuView _view;
+        private readonly AssetReferenceGameObject _viewAsset;
+        private MainMenuView _view;
+        private AsyncOperationHandle<GameObject> _viewHandler;
 
-        public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
+        public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, AssetReferenceGameObject asset)
         {
+            _viewAsset = asset;
+            _viewHandler = Addressables.InstantiateAsync(_viewAsset, placeForUi);
+            _viewHandler.Completed += InitView;
+
             _profilePlayer = profilePlayer;
-            _view = LoadView(placeForUi);
-            AddGameObjects(_view.gameObject);
-            _view.Init(StartGame, ViewRewards, ExitGame);
         }
 
-        private MainMenuView LoadView(Transform placeForUi)
+        private void InitView(AsyncOperationHandle<GameObject> obj)
         {
-            return ResourceLoader.LoadAndInstantiateView<MainMenuView>(_viewPath, placeForUi);
+            _view = obj.Result.GetComponent<MainMenuView>();
+            AddGameObjects(_view.gameObject);
+            _view.Init(StartGame, ViewRewards, ExitGame);
         }
 
         private void StartGame()
@@ -39,10 +44,9 @@ namespace Core
             _profilePlayer.CurrentState.Value = GameState.Reward;
         }
 
-
         private void ExitGame()
         {
-
+            Application.Quit();
         }
     }
 }

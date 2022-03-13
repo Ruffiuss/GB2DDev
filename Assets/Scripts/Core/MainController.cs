@@ -1,6 +1,5 @@
 ﻿using CoreGame;
 using Data;
-using Features.FightsFeature;
 using Features.InventoryFeature;
 using Features.RewardsFeature;
 using Features.ShedFeature;
@@ -9,13 +8,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Tools.ResourceManagement;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Core
 {
     public class MainController : BaseController
     {
-        public MainController(Transform placeForUi, ProfilePlayer profilePlayer, PlayerRewardDataHandler dataSaver)
+        public MainController(Transform placeForUi, ProfilePlayer profilePlayer, PlayerRewardDataHandler dataSaver, AssetReferenceGameObject mainMenuAsset)
         {
+            _mainMenuAsset = mainMenuAsset;
             _profilePlayer = profilePlayer;
             _placeForUi = placeForUi;
             _dataSaver = dataSaver;
@@ -38,6 +39,7 @@ namespace Core
         private readonly PlayerRewardDataHandler _dataSaver;
         private readonly ProfilePlayer _profilePlayer;
         private readonly List<ItemConfig> _itemsConfig;
+        private readonly AssetReferenceGameObject _mainMenuAsset;
 
         protected override void OnDispose()
         {
@@ -54,7 +56,7 @@ namespace Core
                 case GameState.None:
                     break;
                 case GameState.Start:
-                    _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer);
+                    _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _mainMenuAsset);
                     _shedController = new ShedController(_itemsConfig, _profilePlayer.CurrentCar);
                     _shedController.Enter();
                     _shedController.Exit();
