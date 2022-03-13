@@ -18,9 +18,10 @@ MonoBehaviour:
   m_GUID: ed543425145b60a4188460108c153d21
   m_SerializeEntries:
   - m_GUID: f73b5ceaabd6ca94b894ab0f3d4f7577
-    m_Address: Prefabs/mainMenu
+    m_Address: mainMenu
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 3f0d7d23ec41421489c6a0511a7be87b, type: 2}
   m_SchemaSet:
