@@ -1,6 +1,7 @@
 ﻿using CoreGame;
 using Data;
 using Features.InventoryFeature;
+using Features.LocalizationFeature;
 using Features.RewardsFeature;
 using Features.ShedFeature;
 using Model;
@@ -16,9 +17,13 @@ namespace Core
     {
         public MainController(Transform placeForUi, ProfilePlayer profilePlayer, PlayerRewardDataHandler dataSaver, AssetReferenceGameObject mainMenuAsset)
         {
+
             _mainMenuAsset = mainMenuAsset;
+            
             _profilePlayer = profilePlayer;
+
             _placeForUi = placeForUi;
+            
             _dataSaver = dataSaver;
 
             _itemsConfig = ResourceLoader.LoadDataSource<ItemConfig>(

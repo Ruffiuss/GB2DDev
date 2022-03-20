@@ -1,4 +1,5 @@
-﻿using Features.RewardsFeature;
+﻿using Features.LocalizationFeature;
+using Features.RewardsFeature;
 using Model;
 using Model.Analytic;
 using Tools.Ads;
@@ -13,6 +14,7 @@ namespace Core
         [SerializeField] private UnityAdsTools _ads;
         [SerializeField] private PlayerRewardDataHandler _dataSaver;
         [SerializeField] private AssetReferenceGameObject _mainMenuAsset;
+        [SerializeField] private LocalizationController _localizationController;
 
         private MainController _mainController;
         private IAnalyticTools _analyticsTools;

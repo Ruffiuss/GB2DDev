@@ -2,6 +2,7 @@
 using Model;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Localization.Settings;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Core
@@ -12,6 +13,7 @@ namespace Core
         private readonly AssetReferenceGameObject _viewAsset;
         private MainMenuView _view;
         private AsyncOperationHandle<GameObject> _viewHandler;
+        private bool _isLocaleDefault;
 
         public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, AssetReferenceGameObject asset)
         {
@@ -26,7 +28,8 @@ namespace Core
         {
             _view = obj.Result.GetComponent<MainMenuView>();
             AddGameObjects(_view.gameObject);
-            _view.Init(StartGame, ViewRewards, ExitGame);
+            var locale = LocalizationSettings.SelectedLocale;
+            _view.Init(locale, StartGame, ViewRewards, ExitGame, Localize);
         }
 
         private void StartGame()
@@ -47,6 +50,15 @@ namespace Core
         private void ExitGame()
         {
             Application.Quit();
+        }
+
+        private void Localize()
+        {
+            if (_isLocaleDefault)
+                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[1];
+            else
+                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
+            _isLocaleDefault = !_isLocaleDefault;
         }
     }
 }
